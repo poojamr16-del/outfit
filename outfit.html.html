@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit Decider</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff0f6, #eee8ff);
+            min-height: 100vh;
+            color: #292033;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #d63384;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 55px 20px 30px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #d63384;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .box {
+            width: 90%;
+            max-width: 950px;
+            margin: 25px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .choice {
+            border: 2px solid #eee;
+            padding: 18px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .choice:hover {
+            border-color: #d63384;
+            transform: translateY(-4px);
+        }
+
+        .choice input {
+            margin-right: 8px;
+            accent-color: #d63384;
+        }
+
+        .decide-btn {
+            display: block;
+            margin: 30px auto 10px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #d63384, #8e44ad);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .decide-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            background: #fff5fa;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            border: 2px solid #f5c2d9;
+        }
+
+        #result h3 {
+            color: #d63384;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .outfit-icon {
+            font-size: 55px;
+            margin: 10px;
+        }
+
+        .tips {
+            width: 90%;
+            max-width: 950px;
+            margin: 35px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .tip-card div {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #292033;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media(max-width: 700px) {
+            .choices,
+            .tips {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">👗 Outfitly</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#decider">Decider</a>
+        <a href="#tips">Style Tips</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>What Should I <span>Wear?</span> ✨</h1>
+    <p>Stop staring at your wardrobe. Let Outfitly decide your perfect look!</p>
+</section>
+
+<section class="box" id="decider">
+
+    <h2>🎯 Build Your Outfit</h2>
+
+    <div class="choices">
+
+        <label class="choice">
+            <input type="radio" name="occasion" value="College">
+            🎓 College
+        </label>
+
+        <label class="choice">
+            <input type="radio" name="occasion" value="Party">
+            🎉 Party
+        </label>
+
+        <label class="choice">
+            <input type="radio" name="occasion" value="Date">
+            💕 Date
+        </label>
+
+        <label class="choice">
+            <input type="radio" name="occasion" value="Casual">
+            👟 Casual
+        </label>
+
+        <label class="choice">
+            <input type="radio" name="occasion" value="Formal">
+            💼 Formal
+        </label>
+
+        <label class="choice">
+            <input type="radio" name="occasion" value="Travel">
+            ✈️ Travel
+        </label>
+
+    </div>
+
+    <button class="decide-btn" onclick="decideOutfit()">
+        ✨ DECIDE MY OUTFIT
+    </button>
+
+    <div id="result">
+        <div class="outfit-icon">👚✨</div>
+        <h3 id="outfitTitle"></h3>
+        <p id="outfitDescription"></p>
+    </div>
+
+</section>
+
+<section class="tips" id="tips">
+
+    <div class="tip-card">
+        <div>🎨</div>
+        <h3>Match Colors</h3>
+        <p>Try combining neutral colors with one statement color.</p>
+    </div>
+
+    <div class="tip-card">
+        <div>👟</div>
+        <h3>Choose Comfort</h3>
+        <p>A great outfit should look good and feel comfortable.</p>
+    </div>
+
+    <div class="tip-card">
+        <div>✨</div>
+        <h3>Add Accessories</h3>
+        <p>Small accessories can completely change your look.</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Outfitly | Your Style, Your Choice 💗</p>
+</footer>
+
+<script>
+
+function decideOutfit() {
+
+    let selected = document.querySelector(
+        'input[name="occasion"]:checked'
+    );
+
+    if (!selected) {
+        alert("Please choose an occasion first! 😊");
+        return;
+    }
+
+    let occasion = selected.value;
+
+    let outfits = {
+
+        College: [
+            "Oversized T-shirt + Straight-fit Jeans + Sneakers",
+            "Cotton Shirt + Wide-leg Pants + Sneakers",
+            "Crop Top + Cargo Pants + Casual Shoes"
+        ],
+
+        Party: [
+            "Black Dress + Heels + Statement Earrings",
+            "Shimmer Top + Black Pants + Heels",
+            "Satin Top + Skirt + Mini Bag"
+        ],
+
+        Date: [
+            "Pastel Top + Jeans + White Sneakers",
+            "Floral Dress + Sandals + Small Handbag",
+            "Elegant Top + Wide-leg Pants + Minimal Jewellery"
+        ],
+
+        Casual: [
+            "Oversized T-shirt + Cargo Pants + Sneakers",
+            "Tank Top + Mom Jeans + Sneakers",
+            "Hoodie + Joggers + Casual Shoes"
+        ],
+
+        Formal: [
+            "Blazer + Trousers + Formal Shoes",
+            "White Shirt + Black Pants + Loafers",
+            "Formal Dress + Heels + Minimal Accessories"
+        ],
+
+        Travel: [
+            "Oversized T-shirt + Cargo Pants + Sneakers",
+            "Hoodie + Joggers + Comfortable Shoes",
+            "Denim Jacket + T-shirt + Straight Jeans"
+        ]
+    };
+
+    let options = outfits[occasion];
+
+    let randomOutfit =
+        options[Math.floor(Math.random() * options.length)];
+
+    document.getElementById("outfitTitle").innerHTML =
+        "Your " + occasion + " Look 👗";
+
+    document.getElementById("outfitDescription").innerHTML =
+        randomOutfit;
+
+    document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
